@@ -45,6 +45,7 @@
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <ProjectName>hermes_uwp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -153,10 +154,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <TargetName>hermes</TargetName>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <TargetName>hermes</TargetName>
+  </PropertyGroup>
+
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
     <Link>
@@ -168,7 +175,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
     <Link>
@@ -226,7 +233,19 @@
       <ModuleDefinitionFile>hermes.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup Label="UserMacros">
+    <HermesLLVMBuildConfig Condition="'$(Configuration)'=='Debug'">Debug</HermesLLVMBuildConfig>
+    <HermesLLVMBuildConfig Condition="'$(Configuration)'=='Release'">RelWithDebInfo</HermesLLVMBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='Win32'" Label="UserMacros">
+    <HermesBuildRoot>D:\github\mgan_hermes\build_32_uwp\</HermesBuildRoot>
+    <LLVMBuildRoot>D:\github\mgan_hermes\llvm_build_32_uwp\</LLVMBuildRoot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64'" Label="UserMacros">
+    <HermesBuildRoot>D:\github\mgan_hermes\build_uwp\</HermesBuildRoot>
+    <LLVMBuildRoot>D:\github\mgan_hermes\llvm_build_uwp\</LLVMBuildRoot>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
@@ -235,20 +254,7 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalDependencies>"D:\github\hermes_latest_uwp\build_release\API\hermes\Debug\hermesapi.lib";"D:\github\hermes_latest_uwp\build_release\API\hermes\Debug\compileJS.lib";"D:\github\hermes_latest_uwp\build_release\jsi\Debug\jsi.lib";"D:\github\hermes_latest_uwp\build_release\lib\VM\Debug\hermesVMRuntime.lib";D:\github\hermes_latest_uwp\build_release\lib\Platform\Debug\hermesPlatform.lib;D:\github\hermes_latest_uwp\build_release\lib\BCGen\HBC\Debug\hermesHBCBackend.lib;D:\github\hermes_latest_uwp\build_release\lib\BCGen\Debug\hermesBackend.lib;D:\github\hermes_latest_uwp\build_release\lib\Debug\hermesFrontend.lib;D:\github\hermes_latest_uwp\build_release\lib\Inst\Debug\hermesInst.lib;D:\github\hermes_latest_uwp\build_release\lib\Debug\hermesOptimizer.lib;D:\github\hermes_latest_uwp\build_release\lib\SourceMap\Debug\hermesSourceMap.lib;D:\github\hermes_latest_uwp\build_release\lib\Parser\Debug\hermesParser.lib;D:\github\hermes_latest_uwp\build_release\lib\AST\Debug\hermesAST.lib;D:\github\hermes_latest_uwp\build_release\lib\Support\Debug\hermesSupport.lib;D:\github\hermes_latest_uwp\build_release\lib\Regex\Debug\hermesRegex.lib;D:\github\hermes_latest_uwp\build_release\lib\Platform\Unicode\Debug\hermesPlatformUnicode.lib;D:\github\hermes_latest_uwp\llvm_build_release\Debug\lib\LLVMSupport.lib;D:\github\hermes_latest_uwp\llvm_build_release\Debug\lib\LLVMDemangle.lib;D:\github\hermes_latest_uwp\build_release\external\dtoa\Debug\dtoa.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ModuleDefinitionFile>hermes.def</ModuleDefinitionFile>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <CompileAsWinRT>false</CompileAsWinRT>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalDependencies>"D:\github\hermes_latest_uwp\build_release\API\hermes\RelWithDebInfo\hermesapi.lib";"D:\github\hermes_latest_uwp\build_release\API\hermes\RelWithDebInfo\compileJS.lib";"D:\github\hermes_latest_uwp\build_release\jsi\RelWithDebInfo\jsi.lib";"D:\github\hermes_latest_uwp\build_release\lib\VM\RelWithDebInfo\hermesVMRuntime.lib";D:\github\hermes_latest_uwp\build_release\lib\Platform\RelWithDebInfo\hermesPlatform.lib;D:\github\hermes_latest_uwp\build_release\lib\BCGen\HBC\RelWithDebInfo\hermesHBCBackend.lib;D:\github\hermes_latest_uwp\build_release\lib\BCGen\RelWithDebInfo\hermesBackend.lib;D:\github\hermes_latest_uwp\build_release\lib\RelWithDebInfo\hermesFrontend.lib;D:\github\hermes_latest_uwp\build_release\lib\Inst\RelWithDebInfo\hermesInst.lib;D:\github\hermes_latest_uwp\build_release\lib\RelWithDebInfo\hermesOptimizer.lib;D:\github\hermes_latest_uwp\build_release\lib\SourceMap\RelWithDebInfo\hermesSourceMap.lib;D:\github\hermes_latest_uwp\build_release\lib\Parser\RelWithDebInfo\hermesParser.lib;D:\github\hermes_latest_uwp\build_release\lib\AST\RelWithDebInfo\hermesAST.lib;D:\github\hermes_latest_uwp\build_release\lib\Support\RelWithDebInfo\hermesSupport.lib;D:\github\hermes_latest_uwp\build_release\lib\Regex\RelWithDebInfo\hermesRegex.lib;D:\github\hermes_latest_uwp\build_release\lib\Platform\Unicode\RelWithDebInfo\hermesPlatformUnicode.lib;D:\github\hermes_latest_uwp\llvm_build_release\RelWithDebInfo\lib\LLVMSupport.lib;D:\github\hermes_latest_uwp\llvm_build_release\RelWithDebInfo\lib\LLVMDemangle.lib;D:\github\hermes_latest_uwp\build_release\external\dtoa\RelWithDebInfo\dtoa.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(HermesBuildRoot)API\hermes\$(HermesLLVMBuildConfig)\hermesapi.lib;$(HermesBuildRoot)API\hermes\$(HermesLLVMBuildConfig)\compileJS.lib;$(HermesBuildRoot)jsi\$(HermesLLVMBuildConfig)\jsi.lib;$(HermesBuildRoot)lib\VM\$(HermesLLVMBuildConfig)\hermesVMRuntime.lib;$(HermesBuildRoot)lib\Platform\$(HermesLLVMBuildConfig)\hermesPlatform.lib;$(HermesBuildRoot)lib\BCGen\HBC\$(HermesLLVMBuildConfig)\hermesHBCBackend.lib;$(HermesBuildRoot)lib\BCGen\$(HermesLLVMBuildConfig)\hermesBackend.lib;$(HermesBuildRoot)lib\$(HermesLLVMBuildConfig)\hermesFrontend.lib;$(HermesBuildRoot)lib\Inst\$(HermesLLVMBuildConfig)\hermesInst.lib;$(HermesBuildRoot)lib\$(HermesLLVMBuildConfig)\hermesOptimizer.lib;$(HermesBuildRoot)lib\SourceMap\$(HermesLLVMBuildConfig)\hermesSourceMap.lib;$(HermesBuildRoot)lib\Parser\$(HermesLLVMBuildConfig)\hermesParser.lib;$(HermesBuildRoot)lib\AST\$(HermesLLVMBuildConfig)\hermesAST.lib;$(HermesBuildRoot)lib\Support\$(HermesLLVMBuildConfig)\hermesSupport.lib;$(HermesBuildRoot)lib\Regex\$(HermesLLVMBuildConfig)\hermesRegex.lib;$(HermesBuildRoot)lib\Platform\Unicode\$(HermesLLVMBuildConfig)\hermesPlatformUnicode.lib;$(LLVMBuildRoot)\$(HermesLLVMBuildConfig)\lib\LLVMSupport.lib;$(LLVMBuildRoot)\$(HermesLLVMBuildConfig)\lib\LLVMDemangle.lib;$(HermesBuildRoot)external\dtoa\$(HermesLLVMBuildConfig)\dtoa.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>hermes.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>

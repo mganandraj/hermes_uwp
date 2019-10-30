@@ -66,9 +66,9 @@ Generated Files/
 /hermes_uwp_test/Release/
 /hermes_uwp_test/Debug/
 /hermes_uwp_test/x64/
-/hermes_uwp_dll/Release/
-/hermes_uwp_dll/Debug/
-/hermes_uwp_dll/x64/
+/hermes_uwp/Release/
+/hermes_uwp/Debug/
+/hermes_uwp/x64/
 Examples/WindowsSampleApp/Generated Files/
 Examples/WindowsSampleApp/build
 Examples/TypeScript/Generated Files/

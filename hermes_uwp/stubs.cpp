@@ -1,9 +1,15 @@
 #include <windows.h>
 #include <cstdlib>
 
+#if _WIN64
+#define __decorate(__func) WINAPI __imp_##__func
+#else
+#define __decorate(__func) WINAPI _imp__##__func
+#endif
+
 extern "C" {
 
-BOOL __imp_SetInformationJobObject(
+BOOL __decorate(SetInformationJobObject)(
     HANDLE hJob,
     JOBOBJECTINFOCLASS JobObjectInformationClass,
     LPVOID lpJobObjectInformation,
@@ -12,14 +18,13 @@ BOOL __imp_SetInformationJobObject(
   return false;
 }
 
-HANDLE __imp_CreateJobObjectW(
-    LPSECURITY_ATTRIBUTES lpJobAttributes,
-    LPCTSTR lpName) {
+HANDLE __decorate(
+    CreateJobObjectW)(LPSECURITY_ATTRIBUTES lpJobAttributes, LPCTSTR lpName) {
   std::abort();
   return 0;
 }
 
-BOOL __imp_AssignProcessToJobObject(HANDLE hJob, HANDLE hProcess) {
+BOOL __decorate(AssignProcessToJobObject)(HANDLE hJob, HANDLE hProcess) {
   std::abort();
   return false;
 }
@@ -52,7 +57,7 @@ typedef struct _STARTUPINFOW {
   HANDLE hStdError;
 } STARTUPINFOW, *LPSTARTUPINFOW;
 
-BOOL __imp_CreateProcessW(
+BOOL __decorate(CreateProcessW)(
     LPCWSTR lpApplicationName,
     LPWSTR lpCommandLine,
     LPSECURITY_ATTRIBUTES lpProcessAttributes,
@@ -67,12 +72,12 @@ BOOL __imp_CreateProcessW(
   return false;
 }
 
-BOOL __imp_GetExitCodeProcess(HANDLE hProcess, LPDWORD lpExitCode) {
+BOOL __decorate(GetExitCodeProcess)(HANDLE hProcess, LPDWORD lpExitCode) {
   std::abort();
   return false;
 }
 
-DWORD __imp_SearchPathW(
+DWORD __decorate(SearchPathW)(
     LPCWSTR lpPath,
     LPCWSTR lpFileName,
     LPCWSTR lpExtension,
@@ -83,7 +88,7 @@ DWORD __imp_SearchPathW(
   return 0;
 }
 
-BOOL WINAPI __imp_SetConsoleTextAttribute(
+BOOL __decorate(SetConsoleTextAttribute)(
     _In_ HANDLE hConsoleOutput,
     _In_ WORD wAttributes) {
   std::abort();
@@ -105,7 +110,7 @@ typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
   COORD dwMaximumWindowSize;
 } CONSOLE_SCREEN_BUFFER_INFO, *PCONSOLE_SCREEN_BUFFER_INFO;
 
-BOOL WINAPI __imp_GetConsoleScreenBufferInfo(
+BOOL __decorate(GetConsoleScreenBufferInfo)(
     _In_ HANDLE hConsoleOutput,
     _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo) {
   // std::abort();
@@ -113,19 +118,17 @@ BOOL WINAPI __imp_GetConsoleScreenBufferInfo(
   return false;
 }
 
-BOOL WINAPI
-__imp_SetConsoleMode(_In_ HANDLE hConsoleHandle, _In_ DWORD dwMode) {
+BOOL __decorate(SetConsoleMode)(_In_ HANDLE hConsoleHandle, _In_ DWORD dwMode) {
   std::abort();
   return false;
 }
 
-BOOL WINAPI
-__imp_GetConsoleMode(_In_ HANDLE hConsoleHandle, _Out_ LPDWORD lpMode) {
+BOOL __decorate(GetConsoleMode)(_In_ HANDLE hConsoleHandle, _Out_ LPDWORD lpMode) {
   std::abort();
   return false;
 }
 
-BOOL __imp_GetProcessTimes(
+BOOL __decorate(GetProcessTimes)(
     HANDLE hProcess,
     LPFILETIME lpCreationTime,
     LPFILETIME lpExitTime,
@@ -135,29 +138,29 @@ BOOL __imp_GetProcessTimes(
   return false;
 }
 
-HANDLE WINAPI __imp_GetStdHandle(_In_ DWORD nStdHandle) {
-  std::abort();
+HANDLE WINAPI __decorate(GetStdHandle)(_In_ DWORD nStdHandle) {
+  // std::abort();
   return 0;
 }
 
-BOOL WINAPI __imp_SetConsoleCtrlHandler(
+BOOL WINAPI __decorate(SetConsoleCtrlHandler)(
     _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
     _In_ BOOL Add) {
   std::abort();
   return false;
 }
 
-HMODULE __imp_LoadLibraryW(LPCTSTR lpLibFileName) {
+HMODULE __decorate(LoadLibraryW)(LPCTSTR lpLibFileName) {
   std::abort();
   return 0;
 }
 
-UINT __imp_SetErrorMode(UINT uMode) {
+UINT __decorate(SetErrorMode)(UINT uMode) {
   std::abort();
   return 0;
 }
 
-DWORD __imp_ExpandEnvironmentStringsW(
+DWORD __decorate(ExpandEnvironmentStringsW)(
     LPCWSTR lpSrc,
     LPWSTR lpDst,
     DWORD nSize) {
@@ -165,12 +168,12 @@ DWORD __imp_ExpandEnvironmentStringsW(
   return 0;
 }
 
-VOID __imp_RtlCaptureContext(PCONTEXT ContextRecord) {
+VOID __decorate(RtlCaptureContext)(PCONTEXT ContextRecord) {
   std::abort();
   return;
 }
 
-BOOL __imp_CreateHardLinkW(
+BOOL __decorate(CreateHardLinkW)(
     LPTSTR lpFileName,
     LPTSTR lpExistingFileName,
     LPSECURITY_ATTRIBUTES lpSecurityAttributes) {
@@ -178,7 +181,7 @@ BOOL __imp_CreateHardLinkW(
   return false;
 }
 
-LPVOID __imp_MapViewOfFile(
+LPVOID __decorate(MapViewOfFile)(
     HANDLE hFileMappingObject,
     DWORD dwDesiredAccess,
     DWORD dwFileOffsetHigh,
@@ -188,7 +191,7 @@ LPVOID __imp_MapViewOfFile(
   return nullptr;
 }
 
-HANDLE __imp_CreateFileMappingW(
+HANDLE __decorate(CreateFileMappingW)(
     HANDLE hFile,
     LPSECURITY_ATTRIBUTES lpFileMappingAttributes,
     DWORD flProtect,
@@ -199,7 +202,7 @@ HANDLE __imp_CreateFileMappingW(
   return 0;
 }
 
-BOOL __imp_GetVolumePathNameW(
+BOOL __decorate(GetVolumePathNameW)(
     LPCWSTR lpszFileName,
     LPWSTR lpszVolumePathName,
     DWORD cchBufferLength) {
@@ -221,19 +224,19 @@ typedef struct _BY_HANDLE_FILE_INFORMATION {
 } BY_HANDLE_FILE_INFORMATION, *PBY_HANDLE_FILE_INFORMATION,
     *LPBY_HANDLE_FILE_INFORMATION;
 
-BOOL __imp_GetFileInformationByHandle(
+BOOL __decorate(GetFileInformationByHandle)(
     HANDLE hFile,
     LPBY_HANDLE_FILE_INFORMATION lpFileInformation) {
   std::abort();
   return false;
 }
 
-UINT __imp_GetDriveTypeW(LPTSTR lpRootPathName) {
+UINT __decorate(GetDriveTypeW)(LPTSTR lpRootPathName) {
   std::abort();
   return 0;
 }
 
-HANDLE __imp_CreateFileW(
+HANDLE __decorate(CreateFileW)(
     LPTSTR lpFileName,
     DWORD dwDesiredAccess,
     DWORD dwShareMode,
@@ -245,7 +248,7 @@ HANDLE __imp_CreateFileW(
   return 0;
 }
 
-DWORD __imp_GetEnvironmentVariableW(
+DWORD __decorate(GetEnvironmentVariableW)(
     LPCTSTR lpName,
     LPTSTR lpBuffer,
     DWORD nSize) {
@@ -253,7 +256,7 @@ DWORD __imp_GetEnvironmentVariableW(
   return 0;
 }
 
-BOOL __imp_WriteConsoleW(
+BOOL __decorate(WriteConsoleW)(
     _In_ HANDLE hConsoleOutput,
     _In_ const VOID *lpBuffer,
     _In_ DWORD nNumberOfCharsToWrite,
@@ -263,7 +266,7 @@ BOOL __imp_WriteConsoleW(
   return false;
 }
 
-BOOL __imp_VerifyVersionInfoW(
+BOOL __decorate(VerifyVersionInfoW)(
     LPOSVERSIONINFOEXW lpVersionInformation,
     DWORD dwTypeMask,
     DWORDLONG dwlConditionMask) {
@@ -271,7 +274,7 @@ BOOL __imp_VerifyVersionInfoW(
   return false;
 }
 
-ULONGLONG __imp_VerSetConditionMask(
+ULONGLONG __decorate(VerSetConditionMask)(
     ULONGLONG ConditionMask,
     DWORD TypeMask,
     BYTE Condition) {
@@ -279,7 +282,7 @@ ULONGLONG __imp_VerSetConditionMask(
   return 0;
 }
 
-BOOL __imp_GetThreadTimes(
+BOOL __decorate(GetThreadTimes)(
     HANDLE hThread,
     LPFILETIME lpCreationTime,
     LPFILETIME lpExitTime,
@@ -289,4 +292,5 @@ BOOL __imp_GetThreadTimes(
   // This is called from RAIITimer in Hermes.. for sampling profiler.
   return false;
 }
+
 }

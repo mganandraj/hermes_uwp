@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hermes_uwp_dll", "hermes_uwp_dll\hermes_uwp_dll.vcxproj", "{2E240555-4066-47EE-B450-29B245C9A67D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hermes_uwp", "hermes_uwp\hermes_uwp.vcxproj", "{2E240555-4066-47EE-B450-29B245C9A67D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hermes_uwp_test", "hermes_uwp_test\Hermes_uwp_test.vcxproj", "{FDF44BC3-2AAF-4641-B56D-075D4A3BB68E}"
 	ProjectSection(ProjectDependencies) = postProject
